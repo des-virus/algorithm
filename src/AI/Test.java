@@ -35,17 +35,38 @@ public class Test {
         int totalPoint = 0;
         int pointToLeft = 0;
         int pointToRight = 0;
+        int nearL = 10;
+        int nearR = 10;
+        boolean first_time = true;
 
         for (int k = j; k < size; k++) {
             if (a[i][k] == ENEMY_VALUE) {
                 pointToRight++;
+
+            } else {
+                if (!first_time) {
+                    nearR = 0;
+                }
             }
+            if (first_time) {
+                first_time = !first_time;
+            }
+            totalPoint += nearR;
         }
 
+        first_time = true;
         for (int k = j; k >= 0; k--) {
             if (a[i][k] == ENEMY_VALUE) {
                 pointToLeft++;
+            } else {
+                if (!first_time) {
+                    nearL = 0;
+                }
             }
+            if (first_time) {
+                first_time = !first_time;
+            }
+            totalPoint += nearL;
         }
 
         totalPoint = pointToLeft + pointToRight;
@@ -105,7 +126,7 @@ public class Test {
     }
 
     public int calDiagonalPoint(int i, int j) {
-           int totalPoint = 0;
+        int totalPoint = 0;
         int pointToTop = 0;
         int pointToBottom = 0;
         int k, l;
@@ -127,34 +148,34 @@ public class Test {
             totalPoint++;
         }
         return POINT_NEAR_ONE * totalPoint;
-        
+
     }
 
     public static void main(String[] args) {
         Test t = new Test();
 
-        for (int i = 0; i < t.size; i++) {
-            for (int j = 0; j < t.size; j++) {
-                if (t.a[i][j] == 0) {
-                    int hori = t.calHorizontalPoint(i, j);
-                    int vert = t.calVerticalPoint(i, j);
-                    int md = t.calMainDiagonalPoint(i, j);
-                    int d = t.calDiagonalPoint(i, j);
+//        for (int i = 0; i < t.size; i++) {
+//            for (int j = 0; j < t.size; j++) {
+//                if (t.a[i][j] == 0) {
+//                    int hori = t.calHorizontalPoint(i, j);
+//                    int vert = t.calVerticalPoint(i, j);
+//                    int md = t.calMainDiagonalPoint(i, j);
+//                    int d = t.calDiagonalPoint(i, j);
+//
+//                    int max = Math.max(hori, vert);
+//                    max = Math.max(md, max);
+//                    max = Math.max(d, max);
+//
+//                    int total = hori + vert + md + d;
+//
+//                    System.out.print(total + "--");
+//                } else {
+//                    System.out.print("x--");
+//                }
+//            }
+//            System.out.println();
+//        }
 
-                    int max = Math.max(hori, vert);
-                    max = Math.max(md, max);
-                    max = Math.max(d, max);
-                    
-                    int total = hori + vert + md + d;
-
-                    System.out.print(total + "--");
-                } else {
-                    System.out.print("x--");
-                }
-            }
-            System.out.println();
-        }
-
-        // System.out.println(t.calVerticalPoint(0, 2));
+         System.out.println(t.calHorizontalPoint(0, 1));
     }
 }
